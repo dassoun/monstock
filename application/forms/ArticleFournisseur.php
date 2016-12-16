@@ -50,6 +50,10 @@ class Application_Form_ArticleFournisseur extends Zend_Form
         $prix->setAttrib('data-mask', '9999.99');
         $prix->setLabel('Prix');
         
+        $validator = new Zend_Validate_Float();
+        $validator->setMessage("Il semble que la valeur '%value%' ne soit pas correcte.", Zend_Validate_Float::NOT_FLOAT);
+        $prix->addValidator($validator);
+        
         $this->addElement($prix);
         // Fin Prix
         

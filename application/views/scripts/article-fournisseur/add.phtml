@@ -2,11 +2,6 @@
 
 <?= $this->formArticleFournisseur->renderForm(false) ?>
 <?= $this->formArticleFournisseur->getElement('id') ?>
-<?php
-if ($this->article_id) {
-    $this->formArticleFournisseur->getElement('article_id')->setValue($this->article_id);
-}
-?>
 <?= $this->formArticleFournisseur->getElement('article_id')->setMultiOptions($this->articles) ?>
 <?= $this->formArticleFournisseur->getElement('fournisseur_id')->setMultiOptions($this->fournisseurs) ?>
 <?= $this->formArticleFournisseur->getElement('ref_fournisseur') ?>
