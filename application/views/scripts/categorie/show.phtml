@@ -1,0 +1,36 @@
+<fieldset disabled>
+    <!-- Form Name -->
+    <legend>Détail de la Catégorie</legend>
+
+    <!-- Text input-->
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="libelle">Libellé</label>  
+        <div class="col-md-6">
+            <input id="libelle" name="libelle" placeholder="" class="form-control input-md" type="text" value="<?= $this->categorie->getLibelle() ?>">
+        </div>
+    </div>
+</fieldset>
+
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#aticles">Articles</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="aticles" class="tab-pane fade in active">
+        <table class="table table-striped">
+            <?php foreach ($this->articles as $a) : ?>
+                <tr>
+                    <td>
+                        <?= (strlen($a->getDesignation()) > 120) ? substr($this->escape($a->getDesignation()), 0, 120 ) . "..." : $this->escape($a->getDesignation()) ?>
+                    </td>
+                    <td>
+                        <a class="btn btn-xs btn-primary" href="<?= $this->Url(['controller' => 'article', ' action' => 'show', 'id' => $a->getId()]) ?>">Afficher</a>
+                        <a class="btn btn-xs btn-warning" href="<?= $this->Url(['controller' => 'article', 'action' => 'modify', 'id' => $a->getId()]) ?>">Modifier</a>
+                        <a class="btn btn-xs btn-danger" href="<?= $this->Url(['controller' => 'article', 'action' => 'remove', 'id' => $a->getId()]) ?>">Supprimer</a>
+                        <a class="btn btn-xs btn-info" href="<?= $this->Url(['controller' => 'article', 'action' => 'detail', 'id' => $a->getId()]) ?>">Détail</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<?php $this->placeholder('h2')->set('Ajouter un Fournisseur à un Article') ?>
+
+<?= $this->formArticleFournisseur->renderForm(false) ?>
+<?= $this->formArticleFournisseur->getElement('id') ?>
+<?php
+if ($this->article_id) {
+    $this->formArticleFournisseur->getElement('article_id')->setValue($this->article_id);
+}
+?>
+<?= $this->formArticleFournisseur->getElement('article_id')->setMultiOptions($this->articles) ?>
+<?= $this->formArticleFournisseur->getElement('fournisseur_id')->setMultiOptions($this->fournisseurs) ?>
+<?= $this->formArticleFournisseur->getElement('ref_fournisseur') ?>
+<?= $this->formArticleFournisseur->getElement('prix') ?>
+<?= $this->formArticleFournisseur->getElement('page_web') ?>
+<button type="submit" class="btn btn-xs btn-primary">Ajouter</button>
+</form>
+
+<?php
+$this->inlineScript()->captureStart();
+//echo <<<JS
+//    alert('machin');
+//JS;
+$this->inlineScript()->captureEnd();
+?>

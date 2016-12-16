@@ -1,0 +1,9 @@
+<?php $this->placeholder('h2')->set('Supprimer une Catégorie') ?>
+
+<form method="post">
+    <p>Etes-vous sûr de vouloir supprimer la Ctaégorie "<?=$this->escape($this->categorie->getLibelle())?>" ?</p>
+    <p>
+        <button type="submit" name="confirm" value="Oui" class="btn btn-primary">Oui</button>
+        <button type="submit" name="confirm" value="Non" class="btn btn-default">Non</button>
+    </p>
+</form>

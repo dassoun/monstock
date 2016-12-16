@@ -1,0 +1,20 @@
+<?php $this->headTitle('Liste des Catégories') ?>
+<?php $this->placeholder('h2')->set('Liste des Catégories') ?>
+
+<a class="btn btn-xs btn-primary" href="<?= $this->Url(['action' => 'add'])?>">Ajouter</a>
+
+<table class="table table-striped">
+    <?php foreach($this->categories as $c) : ?>
+    <tr>
+        <td>
+            <?=$this->escape($c->getLibelle())?>
+        </td>
+        <td>
+            <a class="btn btn-xs btn-primary" href="<?= $this->Url(['action' => 'show', 'id' => $c->getId()])?>">Afficher</a>
+            <a class="btn btn-xs btn-warning" href="<?= $this->Url(['action' => 'modify', 'id' => $c->getId()])?>">Modifier</a>
+            <a class="btn btn-xs btn-danger" href="<?= $this->Url(['action' => 'remove', 'id' => $c->getId()])?>">Supprimer</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
+

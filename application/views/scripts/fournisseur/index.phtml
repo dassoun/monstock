@@ -1,0 +1,19 @@
+<?php $this->headTitle('Liste des Fournisseurs') ?>
+<?php $this->placeholder('h2')->set('Liste des Fournisseurs') ?>
+
+<a class="btn btn-xs btn-primary" href="<?= $this->Url(['action' => 'add'])?>">Ajouter</a>
+
+<table class="table table-striped">
+    <?php foreach($this->fournisseurs as $f) : ?>
+    <tr>
+        <td>
+            <?=$this->escape($f->getNom())?>
+        </td>
+        <td>
+            <a class="btn btn-xs btn-primary" href="<?= $this->Url(['action' => 'show', 'id' => $f->getId()])?>">Afficher</a>
+            <a class="btn btn-xs btn-warning" href="<?= $this->Url(['action' => 'modify', 'id' => $f->getId()])?>">Modifier</a>
+            <a class="btn btn-xs btn-danger" href="<?= $this->Url(['action' => 'remove', 'id' => $f->getId()])?>">Supprimer</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

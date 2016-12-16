@@ -1,0 +1,19 @@
+<?php $this->headTitle('Liste des Articles') ?>
+<?php $this->placeholder('h2')->set('Liste des Articles') ?>
+
+<a class="btn btn-xs btn-primary" href="<?= $this->Url(['action' => 'add'])?>">Ajouter</a>
+
+<table class="table table-striped">
+    <?php foreach($this->articles as $a) : ?>
+    <tr>
+        <td>
+            <?= (strlen($a->getDesignation()) > 120) ? substr($this->escape($a->getDesignation()), 0, 120 ) . "..." : $this->escape($a->getDesignation()) ?>
+        </td>
+        <td>
+            <a class="btn btn-xs btn-primary" href="<?= $this->Url(['action' => 'show', 'id' => $a->getId()])?>">Afficher</a>
+            <a class="btn btn-xs btn-warning" href="<?= $this->Url(['action' => 'modify', 'id' => $a->getId()])?>">Modifier</a>
+            <a class="btn btn-xs btn-danger" href="<?= $this->Url(['action' => 'remove', 'id' => $a->getId()])?>">Supprimer</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

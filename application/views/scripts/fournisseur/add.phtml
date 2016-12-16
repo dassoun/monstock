@@ -1,0 +1,9 @@
+<?php $this->placeholder('h2')->set('Ajouter un Fournisseur') ?>
+
+<?= $this->formFournisseur->renderForm(false) ?>
+<?= $this->formFournisseur->getElement('nom') ?>
+<?= $this->formFournisseur->getElement('ville') ?>
+<?= $this->formFournisseur->getElement('site_web') ?>
+
+<button type="submit" class="btn btn-xs btn-primary">Ajouter</button>
+</form>

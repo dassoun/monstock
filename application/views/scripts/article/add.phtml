@@ -1,0 +1,12 @@
+<?php $this->placeholder('h2')->set('Ajouter un Article') ?>
+
+<?= $this->formArticle->renderForm(false) ?>
+<?= $this->formArticle->getElement('designation') ?>
+<?= $this->formArticle->getElement('image') ?>
+<?php
+$this->formArticle->getElement('categorie_id')->setMultiOptions($this->categories);
+?>
+<?= $this->formArticle->getElement('categorie_id') ?>
+
+<button type="submit" class="btn btn-xs btn-primary">Ajouter</button>
+</form>
