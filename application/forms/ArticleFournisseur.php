@@ -8,6 +8,7 @@ class Application_Form_ArticleFournisseur extends Zend_Form
         // Début Id
         $id = new Zend_Form_Element_Hidden('id');
         $id->addFilter('Int');
+        $id->setDecorators(array('ViewHelper'));
         
         $this->addElement($id);
         // Fin Id
@@ -47,7 +48,7 @@ class Application_Form_ArticleFournisseur extends Zend_Form
         
         // Début Prix
         $prix = new Zend_Form_Element_Text('prix');
-        $prix->setAttrib('data-mask', '9999.99');
+        //$prix->setAttrib('data-mask', '9999.99');
         $prix->setLabel('Prix');
         
         $validator = new Zend_Validate_Float();

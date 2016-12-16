@@ -10,6 +10,7 @@ class Application_Form_Article extends Zend_Form
         // Début Id
         $id = new Zend_Form_Element_Hidden('id');
         $id->addFilter('Int');
+        $id->setDecorators(array('ViewHelper'));
         
         $this->addElement($id);
         // Fin Id
