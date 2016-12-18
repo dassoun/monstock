@@ -34,14 +34,19 @@ class ArticleController extends Zend_Controller_Action
         
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
-            
+            //var_dump($data); die;
             if ($form->isValid($data)) {
                 $article = new Application_Model_Article();
-                $article->setDesignation($data['designation'])
-                        ->setImage($form->image->getFileName())
-                        ->setCategorie_id($data['categorie_id']);
                 
-                $form->image->receive();
+                $dbTableCategorie = new Application_Model_DbTable_Categorie();
+                $dbTableCategorieMapper = new Application_Model_Mapper_Categorie($dbTableCategorie);
+                $categorie = $dbTableCategorieMapper->find($data['categorie_id']);
+                
+                $article->setDesignation($data['designation'])
+                        //->setImage($form->image->getFileName())
+                        ->setCategorie($categorie);
+                
+                //$form->image->receive();
                 
                 $this->mapper->insert($article);
                 

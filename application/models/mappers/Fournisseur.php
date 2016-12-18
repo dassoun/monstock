@@ -61,8 +61,6 @@ class Application_Model_Mapper_Fournisseur
         $data['ville'] = $fournisseur->getVille();
         $data['site_web'] = $fournisseur->getSite_web();
         
-        //var_dump($data); die;
-        
         $where = $this->dbTable->getAdapter()->quoteInto('id = ?', $fournisseur->getId());
         
         $this->dbTable->update($data, $where);
@@ -83,5 +81,10 @@ class Application_Model_Mapper_Fournisseur
             ->setSite_web($fournisseur['site_web']);
         
         return $obj;
+    }
+    
+    public function delete($id)
+    {
+        $this->dbTable->delete(['id = ?' => $id]);
     }
 }

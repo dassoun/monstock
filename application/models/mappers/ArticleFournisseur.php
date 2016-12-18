@@ -105,4 +105,49 @@ class Application_Model_Mapper_ArticleFournisseur
     {
         $this->dbTable->delete(['id = ?' => $id]);
     }
+    
+    public function update(Application_Model_ArticleFournisseur $articleFournisseur)
+    {
+        $data = [];
+        $data['article_id'] = $articleFournisseur->getArticle()->getId();
+        $data['fournisseur_id'] = $articleFournisseur->getFournisseur()->getId();
+        $data['ref_fournisseur'] = $articleFournisseur->getRef_fournisseur();
+        $data['prix'] = $articleFournisseur->getPrix();
+        $data['page_web'] = $articleFournisseur->getPage_web();
+        
+        //var_dump($data); die;
+        
+        $where = $this->dbTable->getAdapter()->quoteInto('id = ?', $articleFournisseur->getId());
+        
+        $this->dbTable->update($data, $where);
+    }
+    
+    public function find($id)
+    {
+        $articleFournisseur = $this->dbTable->fetchRow(['id = ?' => $id]);
+        
+        if (!$articleFournisseur){
+            return false;
+        }
+        
+        $dbTableArticle = new Application_Model_DbTable_Article();
+        $mapperArticle = new Application_Model_Mapper_Article($dbTableArticle);
+        $article = new Application_Model_Article();
+        $article = $mapperArticle->find($articleFournisseur['article_id']);
+        
+        $dbTableFournisseur = new Application_Model_DbTable_Fournisseur();
+        $mapperFournisseur = new Application_Model_Mapper_Fournisseur($dbTableFournisseur);
+        $fournisseur = new Application_Model_Fournisseur();
+        $fournisseur = $mapperFournisseur->find($articleFournisseur['fournisseur_id']);
+        
+        $obj = new Application_Model_ArticleFournisseur();
+        $obj->setId($articleFournisseur['id'])
+            ->setArticle($mapperArticle->find($articleFournisseur['article_id']))
+            ->setFournisseur($mapperFournisseur->find($articleFournisseur['fournisseur_id']))
+            ->setRef_fournisseur($articleFournisseur['ref_fournisseur'])
+            ->setPrix($articleFournisseur['prix'])
+            ->setPage_web($articleFournisseur['page_web']);
+        
+        return $obj;
+    }
 }

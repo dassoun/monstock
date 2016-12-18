@@ -90,7 +90,7 @@ class Application_Model_Mapper_Article
         
         $data['designation'] = $article->getDesignation();
         $data['image'] = $article->getImage();
-        $data['categorie_id'] = $article->getCategorie()->getCategorie_id();
+        $data['categorie_id'] = $article->getCategorie()->getId();
         
         $id = $this->dbTable->insert($data);
         $article->setId($id);

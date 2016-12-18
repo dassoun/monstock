@@ -38,6 +38,9 @@ class Application_Form_ArticleFournisseur extends Zend_Form
         $filter = new Zend_Filter_StringTrim();
         $ref_fournisseur->addFilter($filter);
         
+        $filter = new Zend_Filter_Null(Zend_Filter_Null::STRING);
+        $ref_fournisseur->addFilter($filter);
+        
         $validator = new Zend_Validate_StringLength();
         $validator->setMax(64);
         $validator->setMessage('La Référence Fournisseur ne doit pas dépasser %max% caractères', Zend_Validate_StringLength::TOO_LONG);
@@ -51,6 +54,12 @@ class Application_Form_ArticleFournisseur extends Zend_Form
         //$prix->setAttrib('data-mask', '9999.99');
         $prix->setLabel('Prix');
         
+        $filter = new Zend_Filter_Null(Zend_Filter_Null::STRING);
+        $prix->addFilter($filter);
+        
+        //$filter = new Zend_Filter_LocalizedToNormalized();
+        //$prix->addFilter($filter);
+        
         $validator = new Zend_Validate_Float();
         $validator->setMessage("Il semble que la valeur '%value%' ne soit pas correcte.", Zend_Validate_Float::NOT_FLOAT);
         $prix->addValidator($validator);
@@ -63,6 +72,9 @@ class Application_Form_ArticleFournisseur extends Zend_Form
         $page_web->setLabel('Page Web');
         
         $filter = new Zend_Filter_StringTrim();
+        $page_web->addFilter($filter);
+        
+        $filter = new Zend_Filter_Null(Zend_Filter_Null::STRING);
         $page_web->addFilter($filter);
         
         $validator = new Zend_Validate_StringLength();

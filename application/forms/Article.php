@@ -36,7 +36,7 @@ class Application_Form_Article extends Zend_Form
         // Fin Libellé
         
         //Début Image
-        $image = new Zend_Form_Element_File('image');
+/*        $image = new Zend_Form_Element_File('image');
         $image->setLabel('Image')
             ->setDestination('C:\www\MesProjets\TestZF1\public\upload');
         // ensure only 1 file
@@ -45,14 +45,21 @@ class Application_Form_Article extends Zend_Form
         $image->addValidator('Size', false, 102400);
         // only JPEG, PNG, and GIFs
         $image->addValidator('Extension', false, 'jpg,png,gif');
+        
+        //$filter = new Zend_Filter_Null(Zend_Filter_Null::STRING);
+        //$image->addFilter($filter);
+        
         $this->addElement($image);
         // Fin Image
-        
+*/        
         // Début Catégorie
         $categorie = new Zend_Form_Element_Select('categorie_id');
         $categorie->setLabel('Catégorie');
         
         $categorie->setRegisterInArrayValidator(false);
+        
+        $filter = new Zend_Filter_Null(Zend_Filter_Null::INTEGER);
+        $categorie->addFilter($filter);
         
         $this->addElement($categorie);
         // Fin Catégorie

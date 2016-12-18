@@ -20,13 +20,13 @@ class FournisseurController extends Zend_Controller_Action
         $form = new Application_Form_Fournisseur();
         
         if ($this->_request->isPost()) {
-            $data = $this->_request->getPost();
+            //$data = $this->_request->getPost();
             
             if ($form->isValid($data)) {
                 $fournisseur = new Application_Model_Fournisseur();
-                $fournisseur->setNom($data['nom'])
-                        ->setVille($data['ville'])
-                        ->setSite_web($data['site_web']);
+                $fournisseur->setNom($form->getValue('nom'))
+                        ->setVille($form->getValue('ville'))
+                        ->setSite_web($form->getValue('site_web'));
                 
                 $this->mapper->insert($fournisseur);
                 
@@ -48,10 +48,10 @@ class FournisseurController extends Zend_Controller_Action
             
             if ($form->isValid($data)) {
                 $fournisseur = new Application_Model_Fournisseur();
-                $fournisseur->setId($data['id']);
-                $fournisseur->setNom($data['nom']);
-                $fournisseur->setVille($data['ville']);
-                $fournisseur->setSite_web($data['site_web']);
+                $fournisseur->setId($form->getValue('id'));
+                $fournisseur->setNom($form->getValue('nom'));
+                $fournisseur->setVille($form->getValue('ville'));
+                $fournisseur->setSite_web($form->getValue('site_web'));
                 
                 $this->mapper->update($fournisseur);
                 
@@ -77,6 +77,41 @@ class FournisseurController extends Zend_Controller_Action
         $this->view->formFournisseur = $form;
     }
 
+    public function removeAction()
+    {
+        if ($this->_request->isPost()){
+            $confirm = $this->_request->getPost('confirm');
+            
+            if ($confirm === 'Oui') {
+                $id = $this->_request->getParam('id');
+                $this->mapper->delete($id);
+            }
+            
+            return $this->_helper->redirector->gotoRoute([
+                'controller' => 'fournisseur'
+            ], false, true);
+        }
+        
+        $this->showAction();
+    }
+    
+    public function showAction()
+    {
+        $id = $this->_request->getParam('id');
+        
+        if (!$id) {
+            throw new Zend_Controller_Router_Exception('No id', 404);
+        }
+        
+        $cond[] = ['id = ?', $id];
+        $fournisseur = $this->mapper->find($id);
+        
+        if (!$fournisseur) {
+            throw new Zend_Controller_Router_Exception('No fournisseur', 404);
+        }
+        
+        $this->view->fournisseur = $fournisseur;
+    }
 }
 
 

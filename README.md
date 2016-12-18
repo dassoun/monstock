@@ -1,4 +1,4 @@
 # monstock
 
-Gestion de stock.
-ZendFramework 1
+Gestion de stock.<br/>;
+Mise en pratique ZendFramework 1

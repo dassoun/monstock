@@ -40,6 +40,9 @@ class Application_Form_Fournisseur extends Zend_Form
         $filter = new Zend_Filter_StringTrim();
         $ville->addFilter($filter);
         
+        $filter = new Zend_Filter_Null(Zend_Filter_Null::STRING);
+        $ville->addFilter($filter);
+        
         $validator = new Zend_Validate_StringLength();
         $validator->setMax(64);
         $validator->setMessage('La Ville ne doit pas dépasser %max% caractères', Zend_Validate_StringLength::TOO_LONG);
@@ -53,6 +56,9 @@ class Application_Form_Fournisseur extends Zend_Form
         $site_web->setLabel('Site Web');
         
         $filter = new Zend_Filter_StringTrim();
+        $site_web->addFilter('StringTrim');
+        
+        $filter = new Zend_Filter_Null(Zend_Filter_Null::STRING);
         $site_web->addFilter($filter);
         
         $validator = new Zend_Validate_StringLength();

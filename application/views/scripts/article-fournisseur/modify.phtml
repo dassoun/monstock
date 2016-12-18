@@ -1,0 +1,11 @@
+<?php $this->placeholder('h2')->set('Modifier un Approvisionnement') ?>
+
+<?= $this->formArticleFournisseur->renderForm(false) ?>
+<?= $this->formArticleFournisseur->getElement('id') ?>
+<?= $this->formArticleFournisseur->getElement('article_id')->setMultiOptions($this->articles) ?>
+<?= $this->formArticleFournisseur->getElement('fournisseur_id')->setMultiOptions($this->fournisseurs) ?>
+<?= $this->formArticleFournisseur->getElement('ref_fournisseur') ?>
+<?= $this->formArticleFournisseur->getElement('prix') ?>
+<?= $this->formArticleFournisseur->getElement('page_web') ?>
+<button type="submit" class="btn btn-xs btn-primary">Modifier</button>
+</form>
