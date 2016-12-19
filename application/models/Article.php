@@ -5,6 +5,7 @@ class Application_Model_Article
     protected $id;
     protected $designation;
     protected $image;
+    protected $quantite_stock;
     protected $categorie;
     
     public function getId() {
@@ -19,6 +20,10 @@ class Application_Model_Article
         return $this->image;
     }
 
+    public function getQuantite_stock() {
+        return $this->quantite_stock;
+    }
+    
     public function getCategorie() {
         return $this->categorie;
     }
@@ -38,6 +43,11 @@ class Application_Model_Article
         return $this;
     }
 
+    public function setQuantite_stock($quantite_stock) {
+        $this->quantite_stock = $quantite_stock;
+        return $this;
+    }
+    
     public function setCategorie($categorie) {
         $this->categorie = $categorie;
         return $this;

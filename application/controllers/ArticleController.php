@@ -42,8 +42,9 @@ class ArticleController extends Zend_Controller_Action
                 $dbTableCategorieMapper = new Application_Model_Mapper_Categorie($dbTableCategorie);
                 $categorie = $dbTableCategorieMapper->find($data['categorie_id']);
                 
-                $article->setDesignation($data['designation'])
+                $article->setDesignation($form->getValue('designation'))
                         //->setImage($form->image->getFileName())
+                        ->setQuantite_stock($form->getValue('quantite_stock'))
                         ->setCategorie($categorie);
                 
                 //$form->image->receive();
@@ -77,7 +78,8 @@ class ArticleController extends Zend_Controller_Action
             if ($form->isValid($data)) {
                 $article = new Application_Model_Article();
                 $article->setId($data['id']);
-                $article->setDesignation($data['designation']);
+                $article->setDesignation($form->getValue('designation'));
+                $article->setQuantite_stock($form->getValue('quantite_stock'));
                 $article->setCategorie($dbTableCategorieMapper->find($data['categorie_id']));
                 
                 $this->mapper->update($article);
@@ -98,6 +100,7 @@ class ArticleController extends Zend_Controller_Action
             
             $data['id'] = $article->getId();
             $data['designation'] = $article->getDesignation();
+            $data['quantite_stock'] = $article->getQuantite_stock();
             $data['categorie_id'] = $article->getCategorie()->getId();
             
             $form->populate($data);

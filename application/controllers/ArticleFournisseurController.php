@@ -51,9 +51,9 @@ class ArticleFournisseurController extends Zend_Controller_Action
                 
                 $articleFournisseur->setArticle($article);
                 $articleFournisseur->setFournisseur($fournisseur);
-                $articleFournisseur->setRef_fournisseur($data['ref_fournisseur']);
+                $articleFournisseur->setRef_fournisseur($form->getValue('ref_fournisseur'));
                 $articleFournisseur->setPrix($data['prix']);
-                $articleFournisseur->setPage_web($data['page_web']);
+                $articleFournisseur->setPage_web($form->getValue('page_web'));
                 
                 $this->mapper->insert($articleFournisseur);
                 
@@ -135,14 +135,15 @@ class ArticleFournisseurController extends Zend_Controller_Action
             $data = $this->_request->getPost();
             
             if ($form->isValid($data)) {
+                $filter = new Zend_Filter_LocalizedToNormalized();
+                
                 $articleFournisseur = new Application_Model_ArticleFournisseur();
                 $articleFournisseur->setId($data['id']);
                 $articleFournisseur->setArticle($dbTableArticleMapper->find($data['article_id']));
                 $articleFournisseur->setFournisseur($dbTableFournisseurMapper->find($data['fournisseur_id']));
-                $articleFournisseur->setRef_fournisseur($data['ref_fournisseur']);
-                $articleFournisseur->setPrix($data['prix']);
-                $articleFournisseur->setPage_web($data['page_web']);
-                
+                $articleFournisseur->setRef_fournisseur($form->getValue('ref_fournisseur'));
+                $articleFournisseur->setPrix($filter->filter($form->getValue('prix')));
+                $articleFournisseur->setPage_web($form->getValue('page_web'));
                 $this->mapper->update($articleFournisseur);
                 
                 return $this->_helper->redirector->gotoRoute([
@@ -151,10 +152,7 @@ class ArticleFournisseurController extends Zend_Controller_Action
                     'id' => $articleFournisseur->getArticle()->getId()
                 ], false, true);
             } else {
-                //$form->populate();
-                echo('erreur');
-                //var_dump($form->getMessages()); //error messages
-                //echo($form->getErrors()); // error codes
+                $form->populate();
             }
         } else {
             $params = $this->_request->getParams();

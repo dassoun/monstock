@@ -52,6 +52,24 @@ class Application_Form_Article extends Zend_Form
         $this->addElement($image);
         // Fin Image
 */        
+        
+        // Début Quantité en stock
+        $quantite_stock = new Zend_Form_Element_Text('quantite_stock');
+        $quantite_stock->setLabel('Quantité en stock');
+        
+        $filter = new Zend_Filter_Null(Zend_Filter_Null::STRING);
+        $quantite_stock->addFilter($filter);
+        
+        //$filter = new Zend_Filter_LocalizedToNormalized();
+        //$prix->addFilter($filter);
+        
+        $validator = new Zend_Validate_Float();
+        $validator->setMessage("Il semble que la valeur '%value%' ne soit pas correcte.", Zend_Validate_Float::NOT_FLOAT);
+        $quantite_stock->addValidator($validator);
+        
+        $this->addElement($quantite_stock);
+        // Fin Quantité en stock
+        
         // Début Catégorie
         $categorie = new Zend_Form_Element_Select('categorie_id');
         $categorie->setLabel('Catégorie');

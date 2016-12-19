@@ -37,6 +37,7 @@ class Application_Model_Mapper_Article
             
             $obj->setId($article['id'])
                 ->setDesignation($article['designation'])
+                ->setQuantite_stock($article['quantite_stock'])
                 ->setCategorie($categorie);
             
             $listArticle[] = $obj;
@@ -49,6 +50,7 @@ class Application_Model_Mapper_Article
     {
         $data = [];
         $data['designation'] = $article->getDesignation();
+        $data['quantite_stock'] = $article->getQuantite_stock();
         $data['categorie_id'] = $article->getCategorie()->getId();
         
         //var_dump($data); die;
@@ -74,6 +76,7 @@ class Application_Model_Mapper_Article
         $obj = new Application_Model_Article();
         $obj->setId($article['id'])
             ->setDesignation($article['designation'])
+            ->setQuantite_stock($article['quantite_stock'])
             ->setCategorie($categorie);
         
         return $obj;
@@ -90,6 +93,7 @@ class Application_Model_Mapper_Article
         
         $data['designation'] = $article->getDesignation();
         $data['image'] = $article->getImage();
+        $data['quantite_stock'] = $article->getQuantite_stock();
         $data['categorie_id'] = $article->getCategorie()->getId();
         
         $id = $this->dbTable->insert($data);
