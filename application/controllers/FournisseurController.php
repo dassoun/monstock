@@ -111,6 +111,18 @@ class FournisseurController extends Zend_Controller_Action
         }
         
         $this->view->fournisseur = $fournisseur;
+        
+        // On va chercher les Articles liés au Fournisseur
+        $dbTableArticleFournisseur = new Application_Model_DbTable_ArticleFournisseur();
+        $dbTableArticleFournisseurMapper = new Application_Model_Mapper_ArticleFournisseur($dbTableArticleFournisseur);
+        $where = [];
+        $where[] = ['fournisseur_id = ?', $fournisseur->getId()];
+        $articleFournisseurs = $dbTableArticleFournisseurMapper->findAll($where);
+        //var_dump($articleFournisseurs);
+        $this->view->articleFournisseur = [];
+        foreach($articleFournisseurs as $articleFournisseur) {
+            $this->view->articleFournisseur[] = $articleFournisseur;
+        }
     }
 }
 

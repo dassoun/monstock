@@ -1,4 +1,57 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>fournisseur</b> and script/action name <b>show</b></p>
+<fieldset>
+    <!-- Form Name -->
+    <legend>Détail du Fournisseur</legend>
+
+    <!-- Text input-->
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="nom">Nom</label>  
+        <div class="col-md-6">
+            <input id="nom" name="nom" placeholder="" class="form-control input-md" type="text" value="<?= $this->fournisseur->getNom() ?>" disabled>
+        </div>
+    </div>
+</fieldset>
+
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#articles">Articles</a></li>
+</ul>
+
+<div class="tab-content">
+    <a class="btn btn-xs btn-primary" href="<?= $this->RUrl(['controller' => 'articleFournisseur', 'action' => 'add', 'idfournisseur' => $this->fournisseur->getId()])?>">Ajouter</a>
+    
+    <?php
+    if ($this->articleFournisseur) {
+        $filter = new Zend_Filter_NormalizedToLocalized();
+    ?>
+        <div id="aticles" class="tab-pane fade in active">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Article</th>
+                        <th>Prix</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($this->articleFournisseur as $af) : ?>
+                    <tr>
+                        <td>
+                            <?= $this->escape($af->getArticle()->getDesignation()) ?>
+                        </td>
+                        <td>
+                            <?= $this->escape($filter->filter($af->getPrix())) ?>
+                        </td>
+                        <td>
+                            <a class="btn btn-xs btn-primary" href="<?= $this->Url(['controller' => 'articleFournisseur', 'action' => 'show', 'idArticle' => $af->getId()]) ?>">Afficher</a>
+                            <a class="btn btn-xs btn-warning" href="<?= $this->RUrl(['controller' => 'articleFournisseur', 'action' => 'modify', 'id' => $af->getId()]) ?>">Modifier</a>
+                            <a class="btn btn-xs btn-danger" href="<?= $this->RUrl(['controller' => 'articleFournisseur', 'action' => 'remove', 'id' => $af->getId()]) ?>">Supprimer</a>
+                            <a class="btn btn-xs btn-info" href="<?= $this->RUrl(['controller' => 'articleFournisseur', 'action' => 'detail', 'id' => $af->getId()]) ?>">Détail</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php
+    }
+    ?>
 </div>
